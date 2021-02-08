@@ -40,7 +40,7 @@ public class FirstTest extends BaseTest{
     {
         driver.findElement(By.id("search_query_top")).sendKeys("dress");
         driver.findElement(By.cssSelector("button[name='submit_search']")).click();
-        String dressPrice = driver.findElement(By.cssSelector("#center_column .product_list > li:nth-child(2) span[itemprop='price']")).getText();
+        String dressPrice = driver.findElement(By.cssSelector("#center_column .product_list > li:nth-child(2)")).getText();
         driver.findElement(By.cssSelector("#center_column .product_list > li:nth-child(2)")).click();
         String detailDressPrice = driver.findElement(By.id("our_price_display")).getText();
         Assert.assertEquals(dressPrice, detailDressPrice);
