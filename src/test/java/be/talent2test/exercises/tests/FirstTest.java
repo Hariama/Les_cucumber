@@ -13,6 +13,8 @@ import org.testng.annotations.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.util.List;
+
 public class FirstTest extends BaseTest{
     public void openBrowser()
     {
@@ -40,11 +42,12 @@ public class FirstTest extends BaseTest{
     {
         driver.findElement(By.id("search_query_top")).sendKeys("dress");
         driver.findElement(By.cssSelector("button[name='submit_search']")).click();
-        String dressPrice = driver.findElement(By.cssSelector("#center_column .product_list > li:nth-child(2)")).getText();
-        driver.findElement(By.cssSelector("#center_column .product_list > li:nth-child(2)")).click();
+        List<WebElement> container = driver.findElements(By.cssSelector(".product_list .product-container"));
+        WebElement selectedContainer = container.get(1);
+        String dressPrice = selectedContainer.findElement(By.cssSelector(".right-block .price")).getText();
+        selectedContainer.findElement(By.cssSelector("img")).click();
         String detailDressPrice = driver.findElement(By.id("our_price_display")).getText();
         Assert.assertEquals(dressPrice, detailDressPrice);
-        // heyg
     }
 
     @AfterTest
