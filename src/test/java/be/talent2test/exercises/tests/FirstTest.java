@@ -16,8 +16,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class FirstTest extends BaseTest{
     public void openBrowser()
     {
-        // System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\OpenJDK\\jdk-15.0.2\\webdrivers\\chromedriver.exe");
-        System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Java\\Webdrivers\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\OpenJDK\\jdk-15.0.2\\webdrivers\\chromedriver.exe");
+//        System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Java\\Webdrivers\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("http://automationpractice.com/index.php");
     }
@@ -39,12 +39,13 @@ public class FirstTest extends BaseTest{
     public void searchDresses()
     {
         driver.findElement(By.id("search_query_top")).sendKeys("dress");
-        //String dressPrice = driver.findElement(By.cssSelector("#center_column .product_list li:nth-child(2) > .product-container span[itemprop='price']")).getText();
+        driver.findElement(By.cssSelector("button[name='submit_search']")).click();
+        String dressPrice = driver.findElement(By.cssSelector("#center_column .product_list > li:nth-child(2) span[itemprop='price']")).getText();
         driver.findElement(By.cssSelector("#center_column .product_list > li:nth-child(2)")).click();
-        //String detailDressPrice = driver.findElement(By.id("our_price_display")).getText();
-        //Assert.assertEquals(dressPrice, detailDressPrice);
+        String detailDressPrice = driver.findElement(By.id("our_price_display")).getText();
+        Assert.assertEquals(dressPrice, detailDressPrice);
     }
 
-    //@AfterTest
-    //public void CleanUp() {driver.quit();}
+    @AfterTest
+    public void CleanUp() {driver.quit();}
 }
