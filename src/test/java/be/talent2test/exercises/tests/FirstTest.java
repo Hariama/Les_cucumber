@@ -18,8 +18,8 @@ import java.util.List;
 public class FirstTest extends BaseTest{
     public void openBrowser()
     {
-        System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\OpenJDK\\jdk-15.0.2\\webdrivers\\chromedriver.exe");
-//        System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Java\\Webdrivers\\chromedriver.exe");
+        // System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\OpenJDK\\jdk-15.0.2\\webdrivers\\chromedriver.exe");
+        // System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Java\\Webdrivers\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("http://automationpractice.com/index.php");
     }
