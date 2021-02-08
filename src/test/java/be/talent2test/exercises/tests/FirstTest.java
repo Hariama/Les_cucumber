@@ -44,6 +44,7 @@ public class FirstTest extends BaseTest{
         driver.findElement(By.cssSelector("#center_column .product_list > li:nth-child(2)")).click();
         String detailDressPrice = driver.findElement(By.id("our_price_display")).getText();
         Assert.assertEquals(dressPrice, detailDressPrice);
+        // heyg
     }
 
     @AfterTest
