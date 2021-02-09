@@ -14,8 +14,13 @@ import java.util.List;
 import org.openqa.selenium.support.PageFactory;
 
 public class HomePage extends ContainerPage {
-    @FindBy(id="search_query_top") WebElement searchBar;
-    @FindBy(css="button[name='submit_search']") WebElement submitButton;
+    @FindBy(id= "search_query_top")
+    WebElement searchBar;
+    @FindBy(css= "button[name='submit_search']")
+    WebElement submitButton;
+    @FindBy(id= "header_logo")
+    WebElement headerlogo;
+
     By productElement = By.cssSelector("[data-id-product='2']");
     By checkoutButton = By.cssSelector("[title='Proceed to checkout']");
 
@@ -24,7 +29,6 @@ public class HomePage extends ContainerPage {
     }
 
     public void validateLogoPresence() {
-        WebElement headerlogo = driver.findElement(By.id("header_logo"));
         Assert.assertTrue(headerlogo.isDisplayed());
     }
 
