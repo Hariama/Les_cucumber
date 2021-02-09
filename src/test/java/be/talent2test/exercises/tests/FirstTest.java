@@ -21,10 +21,20 @@ import java.util.List;
 public class FirstTest extends BaseTest{
     public void openBrowser()
     {
-        System.setProperty("webdriver.gecko.driver", "C:\\Program Files\\Java\\Webdrivers\\geckodriver.exe");
         driver = new FirefoxDriver();
         driver.get("http://automationpractice.com/index.php");
         waiter = new WebDriverWait(driver, 10);
+    }
+
+    public void findProductsContainer() {
+        List<WebElement> container = driver.findElements(By.cssSelector(".product_list .product-container"));
+        Actions actie = new Actions(driver);
+        actie.moveToElement(container.get(1)).perform();
+        driver.findElement(By.cssSelector("[data-id-product='4']")).click();
+        waiter.until(ExpectedConditions.visibilityOf( driver.findElement(By.cssSelector("[title='Proceed to checkout']"))));
+        driver.findElement(By.cssSelector("[title='Proceed to checkout']")).click();
+        waiter.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("cart_title"))));
+        Assert.assertTrue(driver.findElement(By.id("cart_title")).isDisplayed());
     }
 
     @BeforeTest
@@ -68,7 +78,6 @@ public class FirstTest extends BaseTest{
         waiter.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("h2 > .icon-ok")));
         Assert.assertTrue(driver.findElement(By.cssSelector(".icon-ok")).isDisplayed());
     }
-
 
     //Add something from detail-page to cart
     @Test
