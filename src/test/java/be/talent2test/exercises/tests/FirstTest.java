@@ -26,15 +26,12 @@ public class FirstTest extends BaseTest{
         waiter = new WebDriverWait(driver, 10);
     }
 
-    public void findProductsContainer() {
+    // Exercise 7, refactored duplicate code
+    private void getContainerList() {
+        waiter.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.cssSelector(".product_list .product-container"))));
         List<WebElement> container = driver.findElements(By.cssSelector(".product_list .product-container"));
         Actions actie = new Actions(driver);
         actie.moveToElement(container.get(1)).perform();
-        driver.findElement(By.cssSelector("[data-id-product='4']")).click();
-        waiter.until(ExpectedConditions.visibilityOf( driver.findElement(By.cssSelector("[title='Proceed to checkout']"))));
-        driver.findElement(By.cssSelector("[title='Proceed to checkout']")).click();
-        waiter.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("cart_title"))));
-        Assert.assertTrue(driver.findElement(By.id("cart_title")).isDisplayed());
     }
 
     @BeforeTest
@@ -70,10 +67,7 @@ public class FirstTest extends BaseTest{
     //Add something from front-page to cart
     @Test
     public void addFromFrontpageToCart() {
-        waiter.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.cssSelector(".product_list .product-container"))));
-        List<WebElement> container = driver.findElements(By.cssSelector(".product_list .product-container"));
-        Actions actie = new Actions(driver);
-        actie.moveToElement(container.get(1)).perform();
+        getContainerList();
         driver.findElement(By.cssSelector("[data-id-product='2']")).click();
         waiter.until(ExpectedConditions.visibilityOf( driver.findElement(By.cssSelector("[title='Proceed to checkout']"))));
         driver.findElement(By.cssSelector("[title='Proceed to checkout']")).click();
@@ -86,10 +80,7 @@ public class FirstTest extends BaseTest{
     public void addFromDetailpageToCart() {
         driver.findElement(By.id("search_query_top")).sendKeys("dress");
         driver.findElement(By.cssSelector("button[name='submit_search']")).click();
-        waiter.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.cssSelector(".product_list .product-container"))));
-        List<WebElement> container = driver.findElements(By.cssSelector(".product_list .product-container"));
-        Actions actie = new Actions(driver);
-        actie.moveToElement(container.get(1)).perform();
+        getContainerList();
         driver.findElement(By.cssSelector("[data-id-product='4']")).click();
         waiter.until(ExpectedConditions.visibilityOf( driver.findElement(By.cssSelector("[title='Proceed to checkout']"))));
         driver.findElement(By.cssSelector("[title='Proceed to checkout']")).click();
