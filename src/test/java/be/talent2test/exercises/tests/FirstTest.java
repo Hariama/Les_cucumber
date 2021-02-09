@@ -70,13 +70,15 @@ public class FirstTest extends BaseTest{
     //Add something from front-page to cart
     @Test
     public void addFromFrontpageToCart() {
+        waiter.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.cssSelector(".product_list .product-container"))));
         List<WebElement> container = driver.findElements(By.cssSelector(".product_list .product-container"));
-        WebElement button = container.get(1).findElement(By.cssSelector(".button-container .button"));
-        Actions a = new Actions(driver);
-        a.moveToElement(button);
-        a.click();
-        waiter.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("h2 > .icon-ok")));
-        Assert.assertTrue(driver.findElement(By.cssSelector(".icon-ok")).isDisplayed());
+        Actions actie = new Actions(driver);
+        actie.moveToElement(container.get(1)).perform();
+        driver.findElement(By.cssSelector("[data-id-product='2']")).click();
+        waiter.until(ExpectedConditions.visibilityOf( driver.findElement(By.cssSelector("[title='Proceed to checkout']"))));
+        driver.findElement(By.cssSelector("[title='Proceed to checkout']")).click();
+        waiter.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("cart_title"))));
+        Assert.assertTrue(driver.findElement(By.id("cart_title")).isDisplayed());
     }
 
     //Add something from detail-page to cart
