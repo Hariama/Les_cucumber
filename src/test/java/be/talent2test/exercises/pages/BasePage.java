@@ -2,6 +2,7 @@ package be.talent2test.exercises.pages;
 
 import be.talent2test.exercises.support.DriverProvider;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class BasePage {
@@ -12,4 +13,8 @@ public abstract class BasePage {
 //        this.driver = driver;
 //        this.waiter = waiter;
 //    }
+
+    public BasePage(){
+        PageFactory.initElements(driver, this);
+    }
 }
