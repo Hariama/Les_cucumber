@@ -6,6 +6,9 @@ import org.junit.BeforeClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -18,8 +21,10 @@ import java.util.List;
 public class FirstTest extends BaseTest{
     public void openBrowser()
     {
-        driver = new ChromeDriver();
+        System.setProperty("webdriver.gecko.driver", "C:\\Program Files\\Java\\Webdrivers\\geckodriver.exe");
+        driver = new FirefoxDriver();
         driver.get("http://automationpractice.com/index.php");
+        waiter = new WebDriverWait(driver, 10);
     }
 
     @BeforeTest
@@ -53,16 +58,23 @@ public class FirstTest extends BaseTest{
     //Add something from front-page to cart
     @Test
     public void addFromFrontpageToCart() {
-
+        List<WebElement> container = driver.findElements(By.cssSelector(".product_list .product-container"));
+        WebElement button = container.get(1).findElement(By.cssSelector(".button-container .button"));
+        Actions a = new Actions(driver);
+        a.moveToElement(button);
+        a.click();
+        waiter.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("h2 > .icon-ok")));
+        Assert.assertTrue(driver.findElement(By.cssSelector(".icon-ok")).isDisplayed());
     }
 
+    /*
     //Add something from detail-page to cart
     @Test
     public void addFromDetailpageToCart() {
         driver.findElement(By.id("search_query_top")).sendKeys("dress");
         driver.findElement(By.cssSelector("button[name='submit_search']")).click();
         List<WebElement> container = driver.findElements(By.cssSelector(".product_list .product-container"));
-    }
+    }*/
 
     @AfterTest
     public void CleanUp() {driver.quit();}
