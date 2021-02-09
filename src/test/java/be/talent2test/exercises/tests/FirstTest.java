@@ -6,6 +6,9 @@ import org.junit.BeforeClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -18,7 +21,8 @@ import java.util.List;
 public class FirstTest extends BaseTest{
     public void openBrowser()
     {
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver();
+        waiter = new WebDriverWait(driver, 10);
         driver.get("http://automationpractice.com/index.php");
     }
 
@@ -41,10 +45,12 @@ public class FirstTest extends BaseTest{
     {
         driver.findElement(By.id("search_query_top")).sendKeys("dress");
         driver.findElement(By.cssSelector("button[name='submit_search']")).click();
+        waiter.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.cssSelector(".product_list .product-container"))));
         List<WebElement> container = driver.findElements(By.cssSelector(".product_list .product-container"));
         WebElement selectedContainer = container.get(1);
         String dressPrice = selectedContainer.findElement(By.cssSelector(".right-block .price")).getText();
         selectedContainer.findElement(By.cssSelector("img")).click();
+        waiter.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("our_price_display"))));
         String detailDressPrice = driver.findElement(By.id("our_price_display")).getText();
         Assert.assertEquals(dressPrice, detailDressPrice);
     }
@@ -61,9 +67,16 @@ public class FirstTest extends BaseTest{
     public void addFromDetailpageToCart() {
         driver.findElement(By.id("search_query_top")).sendKeys("dress");
         driver.findElement(By.cssSelector("button[name='submit_search']")).click();
+        waiter.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.cssSelector(".product_list .product-container"))));
         List<WebElement> container = driver.findElements(By.cssSelector(".product_list .product-container"));
+        Actions actie = new Actions(driver);
+        actie.moveToElement(container.get(1)).perform();
+        driver.findElement(By.cssSelector("[data-id-product='4']")).click();
+        driver.findElement(By.cssSelector("a[title='Proceed to checkout']")).click();
+//        waiter.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("cart_title"))));
+//        Assert.assertTrue(driver.findElement(By.id("cart_title")).isDisplayed());
     }
 
-    @AfterTest
-    public void CleanUp() {driver.quit();}
+//    @AfterTest
+//    public void CleanUp() {driver.quit();}
 }

@@ -6,4 +6,5 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class BaseTest {
     WebDriver driver;
+    WebDriverWait waiter;
 }
