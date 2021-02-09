@@ -17,22 +17,25 @@ public class ContainerPage extends BasePage {
         return container.get(index);
     }
 
-    public void selectContainerElement(int index, String webelement)
+    public ContainerPage selectContainerElement(int index, String webelement)
     {
          getContainer(index).findElement(By.cssSelector(webelement)).click();
+         return this;
     }
 
-    public void getContainerList()
+    public ContainerPage mouseOverProductCard()
     {
         waiter.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.cssSelector(".product_list .product-container"))));
         List<WebElement> container = driver.findElements(By.cssSelector(".product_list .product-container"));
         Actions actie = new Actions(driver);
         actie.moveToElement(container.get(1)).perform();
+        return this;
     }
 
-    public void addToCartAndGoToCheckout(int dataId) {
+    public CheckoutPage addToCartAndGoToCheckout(int dataId) {
         driver.findElement(By.cssSelector(String.format("[data-id-product='%s']", dataId))).click();
         waiter.until(ExpectedConditions.visibilityOf( driver.findElement(By.cssSelector("[title='Proceed to checkout']"))));
         driver.findElement(By.cssSelector("[title='Proceed to checkout']")).click();
+        return new CheckoutPage();
     }
 }

@@ -4,18 +4,9 @@ import be.talent2test.exercises.pages.CheckoutPage;
 import be.talent2test.exercises.pages.HomePage;
 import be.talent2test.exercises.pages.ResultPage;
 import be.talent2test.exercises.support.DriverProvider;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-
-import java.sql.Driver;
 
 public class FirstTest {
     @BeforeTest
@@ -26,16 +17,14 @@ public class FirstTest {
 
     //Exercise 4
     @Test
-    public void detectElements()
-    {
+    public void detectElements() {
         HomePage hp = new HomePage();
         hp.validateLogoPresence();
     }
 
     //Exercise 5
     @Test
-    public void searchDresses()
-    {
+    public void searchDresses() {
         HomePage hp = new HomePage();
         ResultPage rp = new ResultPage();
 
@@ -49,25 +38,35 @@ public class FirstTest {
     //Add something from front-page to cart
     @Test
     public void addFromFrontpageToCart() {
-        HomePage hp = new HomePage();
-        CheckoutPage cp = new CheckoutPage();
+        new HomePage()
+                .mouseOverProductCard()
+                .addToCartAndGoToCheckout(2)
+                .validateArrivalAtCheckoutPage();
 
-        hp.getContainerList();
-        hp.addToCartAndGoToCheckout(2);
-        cp.validateArrivalAtCheckoutPage();
+//        HomePage hp = new HomePage();
+//        CheckoutPage cp = new CheckoutPage();
+//
+//        hp.getContainerList();
+//        hp.addToCartAndGoToCheckout(2);
+//        cp.validateArrivalAtCheckoutPage();
     }
 
     //Add something from detail-page to cart
     @Test
     public void addFromDetailpageToCart() {
-        HomePage hp = new HomePage();
-        ResultPage rp = new ResultPage();
-        CheckoutPage cp = new CheckoutPage();
+        new HomePage().searchFor("dress")
+                .mouseOverProductCard()
+                .addToCartAndGoToCheckout(4)
+                .validateArrivalAtCheckoutPage();
 
-        hp.searchFor("dress");
-        rp.getContainerList();
-        rp.addToCartAndGoToCheckout(4);
-        cp.validateArrivalAtCheckoutPage();
+//        HomePage hp = new HomePage();
+//        ResultPage rp = new ResultPage();
+//        CheckoutPage cp = new CheckoutPage();
+//
+//        hp.searchFor("dress");
+//        rp.mouseOverProductCard();
+//        rp.addToCartAndGoToCheckout(4);
+//        cp.validateArrivalAtCheckoutPage();
     }
 
     @AfterTest

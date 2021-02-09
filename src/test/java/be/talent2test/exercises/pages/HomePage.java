@@ -26,10 +26,11 @@ public class HomePage extends ContainerPage {
         return getContainer(index).findElement(By.cssSelector(".right-block .price")).getText();
     }
 
-    public void searchFor(String word)
+    public HomePage searchFor(String word)
     {
         driver.findElement(searchBar).sendKeys(word);
         driver.findElement(submitButton).click();
+        return this;
     }
 
 }
