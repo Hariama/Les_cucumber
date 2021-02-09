@@ -18,8 +18,6 @@ import java.util.List;
 public class FirstTest extends BaseTest{
     public void openBrowser()
     {
-        // System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\OpenJDK\\jdk-15.0.2\\webdrivers\\chromedriver.exe");
-        // System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Java\\Webdrivers\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("http://automationpractice.com/index.php");
     }
@@ -29,7 +27,7 @@ public class FirstTest extends BaseTest{
         openBrowser();
     }
 
-
+    //Exercise 4
     @Test
     public void detectElements()
     {
@@ -37,6 +35,7 @@ public class FirstTest extends BaseTest{
         Assert.assertTrue(headerlogo.isDisplayed());
     }
 
+    //Exercise 5
     @Test
     public void searchDresses()
     {
@@ -48,6 +47,21 @@ public class FirstTest extends BaseTest{
         selectedContainer.findElement(By.cssSelector("img")).click();
         String detailDressPrice = driver.findElement(By.id("our_price_display")).getText();
         Assert.assertEquals(dressPrice, detailDressPrice);
+    }
+
+    //Exercise 6
+    //Add something from front-page to cart
+    @Test
+    public void addFromFrontpageToCart() {
+
+    }
+
+    //Add something from detail-page to cart
+    @Test
+    public void addFromDetailpageToCart() {
+        driver.findElement(By.id("search_query_top")).sendKeys("dress");
+        driver.findElement(By.cssSelector("button[name='submit_search']")).click();
+        List<WebElement> container = driver.findElements(By.cssSelector(".product_list .product-container"));
     }
 
     @AfterTest
