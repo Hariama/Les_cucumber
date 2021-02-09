@@ -1,8 +1,7 @@
 Feature: Webshop
 
   Scenario: Navigate to a site
-    Given I am on the site http://automationpractice.com/index.php
-    When I see the homepage
+    When I navigate to the site "http://automationpractice.com/index.php"
     Then I am on the homepage
 
   Scenario: Search For Dress
