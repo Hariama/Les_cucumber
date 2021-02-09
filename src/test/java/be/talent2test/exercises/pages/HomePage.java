@@ -4,17 +4,24 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.util.List;
+import org.openqa.selenium.support.PageFactory;
 
 public class HomePage extends ContainerPage {
-    By searchBar = By.id("search_query_top");
-    By submitButton = By.cssSelector("button[name='submit_search']");
-    By productElement = By.cssSelector("[data-id-product='2']");
-    By checkoutButton = By.cssSelector("[title='Proceed to checkout']");
+
+   // By searchBar = By.id("search_query_top");
+   // By submitButton = By.cssSelector("button[name='submit_search']");
+
+    @FindBy(id = "search_query_top")
+    WebElement searchBar;
+
+    @FindBy(css = "button[name='submit_search']")
+    WebElement submitButton;
 
     public void validateLogoPresence() {
         WebElement headerlogo = driver.findElement(By.id("header_logo"));
@@ -28,8 +35,8 @@ public class HomePage extends ContainerPage {
 
     public HomePage searchFor(String word)
     {
-        driver.findElement(searchBar).sendKeys(word);
-        driver.findElement(submitButton).click();
+        searchBar.sendKeys(word);
+        submitButton.click();
         return this;
     }
 
