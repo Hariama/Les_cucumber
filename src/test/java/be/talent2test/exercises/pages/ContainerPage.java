@@ -4,12 +4,19 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
 public class ContainerPage extends BasePage {
+    static String productPrice;
+
+    public ContainerPage() {
+        PageFactory.initElements(driver, this);
+    }
+
     public WebElement getContainer(int index)
     {
         waiter.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.cssSelector(".product_list .product-container"))));
@@ -17,10 +24,10 @@ public class ContainerPage extends BasePage {
         return container.get(index);
     }
 
-    public ContainerPage selectContainerElement(int index, String webelement)
+    public ResultPage selectContainerElement(int index, String webelement)
     {
          getContainer(index).findElement(By.cssSelector(webelement)).click();
-         return this;
+         return new ResultPage();
     }
 
     public ContainerPage mouseOverProductCard()
