@@ -72,11 +72,12 @@ public class FirstTest extends BaseTest{
         Actions actie = new Actions(driver);
         actie.moveToElement(container.get(1)).perform();
         driver.findElement(By.cssSelector("[data-id-product='4']")).click();
-        driver.findElement(By.cssSelector("a[title='Proceed to checkout']")).click();
-//        waiter.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("cart_title"))));
-//        Assert.assertTrue(driver.findElement(By.id("cart_title")).isDisplayed());
+        waiter.until(ExpectedConditions.visibilityOf( driver.findElement(By.cssSelector("[title='Proceed to checkout']"))));
+        driver.findElement(By.cssSelector("[title='Proceed to checkout']")).click();
+        waiter.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("cart_title"))));
+        Assert.assertTrue(driver.findElement(By.id("cart_title")).isDisplayed());
     }
 
-//    @AfterTest
-//    public void CleanUp() {driver.quit();}
+    @AfterTest
+    public void CleanUp() {driver.quit();}
 }
