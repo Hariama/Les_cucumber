@@ -26,13 +26,7 @@ public class FirstTest extends BaseTest{
         waiter = new WebDriverWait(driver, 10);
     }
 
-    // Exercise 7, refactored duplicate code
-    private void getContainerList() {
-        waiter.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.cssSelector(".product_list .product-container"))));
-        List<WebElement> container = driver.findElements(By.cssSelector(".product_list .product-container"));
-        Actions actie = new Actions(driver);
-        actie.moveToElement(container.get(1)).perform();
-    }
+
 
     @BeforeTest
     public void Initialize() {
