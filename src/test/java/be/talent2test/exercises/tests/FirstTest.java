@@ -1,5 +1,7 @@
 package be.talent2test.exercises.tests;
 
+import be.talent2test.exercises.tests.pages.homePage;
+import be.talent2test.exercises.tests.pages.resultPage;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -18,19 +20,16 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.List;
 
-public class FirstTest extends BaseTest{
-    public void openBrowser()
-    {
-        driver = new FirefoxDriver();
-        driver.get("http://automationpractice.com/index.php");
-        waiter = new WebDriverWait(driver, 10);
-    }
+public class FirstTest {
 
-
+    WebDriver driver;
+    WebDriverWait waiter;
 
     @BeforeTest
     public void Initialize() {
-        openBrowser();
+        driver = new FirefoxDriver();
+        driver.get("http://automationpractice.com/index.php");
+        waiter = new WebDriverWait(driver, 10);
     }
 
     //Exercise 4
@@ -45,13 +44,12 @@ public class FirstTest extends BaseTest{
     @Test
     public void searchDresses()
     {
-        driver.findElement(By.id("search_query_top")).sendKeys("dress");
-        driver.findElement(By.cssSelector("button[name='submit_search']")).click();
-        waiter.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.cssSelector(".product_list .product-container"))));
-        List<WebElement> container = driver.findElements(By.cssSelector(".product_list .product-container"));
-        WebElement selectedContainer = container.get(1);
-        String dressPrice = selectedContainer.findElement(By.cssSelector(".right-block .price")).getText();
-        selectedContainer.findElement(By.cssSelector("img")).click();
+        homePage hp = new homePage(driver, waiter);
+        resultPage rp = new resultPage(driver, waiter);
+
+        hp.searchFor("dress");
+        String dressPrice = hp.getProductPrice(1);
+        hp.getContainerElement(1).findElement(By.cssSelector("img")).click();
         waiter.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("our_price_display"))));
         String detailDressPrice = driver.findElement(By.id("our_price_display")).getText();
         Assert.assertEquals(dressPrice, detailDressPrice);
