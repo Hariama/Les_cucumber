@@ -41,7 +41,7 @@ public class FirstTest {
 
         hp.searchFor("dress");
         String dressPrice = hp.getProductPrice(1);
-        hp.getContainer(1).findElement(By.cssSelector("img")).click();
+        hp.selectContainerElement(1, "img");
         rp.validatePrices(dressPrice);
     }
 

@@ -17,6 +17,11 @@ public class ContainerPage extends BasePage {
         return container.get(index);
     }
 
+    public void selectContainerElement(int index, String webelement)
+    {
+         getContainer(index).findElement(By.cssSelector(webelement)).click();
+    }
+
     public void getContainerList()
     {
         waiter.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.cssSelector(".product_list .product-container"))));
