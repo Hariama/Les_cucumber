@@ -25,13 +25,19 @@ public class FirstTest {
     //Exercise 5
     @Test
     public void searchDresses() {
-        HomePage hp = new HomePage();
-        ResultPage rp = new ResultPage();
+        new HomePage()
+                .searchFor("Dress")
+                .getProductPrice(1)
+                .selectContainerElement(1, "img")
+                .validatePrices();
 
-        hp.searchFor("dress");
-        String dressPrice = hp.getProductPrice(1);
-        hp.selectContainerElement(1, "img");
-        rp.validatePrices(dressPrice);
+//        HomePage hp = new HomePage();
+//        ResultPage rp = new ResultPage();
+//
+//        hp.searchFor("dress");
+//        hp.getProductPrice(1);
+//        hp.selectContainerElement(1, "img");
+//        rp.validatePrices();
     }
 
     //Exercise 6
