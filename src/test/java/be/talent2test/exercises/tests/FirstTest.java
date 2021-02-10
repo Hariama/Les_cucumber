@@ -1,4 +1,4 @@
-package be.talent2test.exercises.tests;
+/*package be.talent2test.exercises.tests;
 
 import be.talent2test.exercises.pages.CheckoutPage;
 import be.talent2test.exercises.pages.HomePage;
@@ -80,3 +80,4 @@ public class FirstTest {
         DriverProvider.destroyDriver();
     }
 }
+*/

@@ -11,8 +11,7 @@ import org.openqa.selenium.WebDriver;
 import io.cucumber.java.en.Given;
 import org.testng.annotations.BeforeTest;
 
-
-public class StepDefinitions {
+public class CommonSteps {
     @Before
     public void initilize() {
         DriverProvider.createDriver();
