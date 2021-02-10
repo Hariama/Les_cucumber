@@ -1,5 +1,6 @@
 package be.talent2test.exercises.pages;
 
+import be.talent2test.exercises.support.World;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,10 +21,10 @@ public class ResultPage extends ContainerPage {
         PageFactory.initElements(driver, this);
     }
 
-    public void validatePrices() {
+    public void validatePrices(World world) {
         waiter.until(ExpectedConditions.visibilityOf(priceDisplay));
         String detailDressPrice = priceDisplay.getText();
-        Assert.assertEquals(productPrice, detailDressPrice);
+        Assert.assertEquals(world.getProductPrice(), detailDressPrice);
     }
 
     public void selectProduct()

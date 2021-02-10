@@ -1,6 +1,7 @@
 package be.talent2test.exercises.pages;
 
 import be.talent2test.exercises.support.DriverProvider;
+import be.talent2test.exercises.support.World;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,9 +33,9 @@ public class HomePage extends ContainerPage {
         Assert.assertTrue(headerlogo.isDisplayed());
     }
 
-    public HomePage getProductPrice(int index)
+    public HomePage getProductPrice(int index, World world)
     {
-        productPrice = getContainer(index).findElement(By.cssSelector(".right-block .price")).getText();
+        world.setProductPrice(getContainer(index).findElement(By.cssSelector(".right-block .price")).getText());
         return this;
     }
 

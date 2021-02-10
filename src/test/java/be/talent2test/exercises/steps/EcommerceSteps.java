@@ -5,6 +5,7 @@ import be.talent2test.exercises.pages.ContainerPage;
 import be.talent2test.exercises.pages.HomePage;
 import be.talent2test.exercises.pages.ResultPage;
 import be.talent2test.exercises.support.DriverProvider;
+import be.talent2test.exercises.support.World;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
@@ -13,6 +14,12 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class EcommerceSteps {
+    World world;
+
+    public EcommerceSteps(World world){
+        this.world = world;
+    }
+
     @When("I enter {string} in the searchbalk and click on the search button")
     public void iEnterDressInTheSearchbalkAndClickOnTheSearchButton(String product) {
         new HomePage().searchFor(product);
@@ -26,7 +33,7 @@ public class EcommerceSteps {
     @And("I click on product {int}")
     public void iClickOnAProduct(int index) {
         new HomePage()
-                .getProductPrice(index)
+                .getProductPrice(index, world)
                 .selectContainerElement(index, "img");
     }
 
@@ -43,6 +50,6 @@ public class EcommerceSteps {
 
     @Then("I can see the the details of the product on the redirected site")
     public void iCanSeeTheTheDetailsOfTheProductOnTheRedirectedSite() {
-        new ResultPage().validatePrices();
+        new ResultPage().validatePrices(world);
     }
 }

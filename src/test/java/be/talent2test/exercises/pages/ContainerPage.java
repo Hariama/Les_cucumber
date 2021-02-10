@@ -1,5 +1,6 @@
 package be.talent2test.exercises.pages;
 
+import be.talent2test.exercises.support.World;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,7 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 public class ContainerPage extends BasePage {
-    static String productPrice;
+//    static String productPrice;
 
     @FindBy(css = ".product_list .product-container" )
     WebElement container;
@@ -41,8 +42,8 @@ public class ContainerPage extends BasePage {
         return this;
     }
 
-    public CheckoutPage addToCartAndGoToCheckout(int dataId) {
-        driver.findElement(By.cssSelector(String.format("[data-id-product='%s']", dataId))).click();
+    public CheckoutPage addToCartAndGoToCheckout(int index) {
+        driver.findElement(By.cssSelector(String.format("[data-id-product='%s']", index))).click();
         waiter.until(ExpectedConditions.visibilityOf(checkoutButton));
         checkoutButton.click();
         return new CheckoutPage();

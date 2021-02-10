@@ -3,6 +3,7 @@ package be.talent2test.exercises.steps;
 import be.talent2test.exercises.pages.HomePage;
 import be.talent2test.exercises.support.DriverProvider;
 import be.talent2test.exercises.support.ScenarioManager;
+import be.talent2test.exercises.support.World;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;

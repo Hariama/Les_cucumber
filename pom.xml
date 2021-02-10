@@ -64,6 +64,12 @@ used to run tests under this user
             <artifactId>reporting-plugin</artifactId>
             <version>4.0.95</version>
         </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-picocontainer</artifactId>
+            <version>6.8.1</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
