@@ -22,7 +22,7 @@ public abstract class DriverProvider {
     }
 
     public static void createDriver() {
-        WebDriver localDriver = new FirefoxDriver();
+        WebDriver localDriver = new DriverManagerFactory().getDriverManager(BROWSERS.FIREFOX).returnDriver();
         driver = new EventFiringWebDriver(localDriver);
         EventHandler eventHandler = new EventHandler();
         driver.register(eventHandler);
