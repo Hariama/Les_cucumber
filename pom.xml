@@ -40,14 +40,6 @@ used to run tests under this user
                 </plugins>
             </build>
         </profile>
-        <profile>
-            <id>tester2</id>
-            <properties>
-                <cucumber.filter.tags>
-                    @Tester2
-                </cucumber.filter.tags>
-            </properties>
-        </profile>
     </profiles>
 
 
