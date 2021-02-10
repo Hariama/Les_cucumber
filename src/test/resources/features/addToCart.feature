@@ -4,6 +4,7 @@ Feature: Webshop
     When I navigate to the site "http://automationpractice.com/index.php"
     Then I am on the homepage
 
+  @Tester1
   Scenario: Search For Dress
     Given I navigate to the site "http://automationpractice.com/index.php"
     When I enter "dress" in the searchbalk and click on the search button
@@ -16,6 +17,7 @@ Feature: Webshop
     And I click on the add to cart button of product 2 and I click on "proceed to checkout"
     Then I should see the checkout page with the added products
 
+  @Tester1
   Scenario: Add product from it's detail page to the Cart
     Given I navigate to the site "http://automationpractice.com/index.php"
     When I enter "dress" in the searchbalk and click on the search button
