@@ -2,10 +2,11 @@ package be.talent2test.exercises.support;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class DriverProvider {
-    static WebDriver driver;
+    static EventFiringWebDriver driver;
     static WebDriverWait waiter;
 
     public static WebDriver getDriver() {
@@ -21,7 +22,10 @@ public abstract class DriverProvider {
     }
 
     public static void createDriver() {
-        driver = new FirefoxDriver();
+        WebDriver localDriver = new FirefoxDriver();
+        driver = new EventFiringWebDriver(localDriver);
+        EventHandler eventHandler = new EventHandler();
+        driver.register(eventHandler);
         waiter = new WebDriverWait(driver, 10);
     }
 
